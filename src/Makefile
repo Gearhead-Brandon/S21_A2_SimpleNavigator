@@ -23,7 +23,7 @@ clean: rm_build
 #	@rm -rf ./$(DIR_REPORT)
 
 rm_build:
-	@rm -rf $(APP_BUILD)
+	@rm -rf $(DIR_BUILD)
 #	@rm -rf $(TEST_BUILD)
 
 rebuild: clean install

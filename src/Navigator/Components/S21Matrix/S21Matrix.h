@@ -150,7 +150,7 @@ class S21Matrix {
    * @brief Fill matrix with numbers
    * @param num
    */
-  void FillNumbers(T num);
+  void Fill(T value);
 
   /**
    * @brief Print matrix

@@ -2,11 +2,14 @@
 #define S21_GRAPH_H
 
 #include <iostream>
-#include "../Common/S21Matrix/S21Matrix.h"
+#include "../Components/S21Matrix/S21Matrix.h"
+#include "../Components/OpResult/OpResult.h"
+#include <vector>
 
-namespace s21{
+namespace s21
+{
 
-  class Graph {
+  class Graph{
 
     S21Matrix<int> adjacencyMatrix_;
 
@@ -14,9 +17,18 @@ namespace s21{
     Graph();
     ~Graph() = default;
 
-    void LoadGraphFromFile(std::string filename);
+    OpResult LoadGraphFromFile(std::string filename);
 
-    void SaveGraphToFile(std::string filename);
+    void ExportGraphToDot(std::string filename);
+
+    //int operator()(int i, int j) const;
+
+    std::vector<int> getAdjacentVertices(int start_vertex);
+
+    int size() const;
+
+  private:
+    void reset();
   };
 
 }
