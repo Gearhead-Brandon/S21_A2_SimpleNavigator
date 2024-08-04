@@ -14,6 +14,7 @@ class GraphAlgorithms {
 
   std::vector<int> DepthFirstSearch(Graph &graph, int start_vertex);
   std::vector<int> BreadthFirstSearch(Graph &graph, int start_vertex);
+  
   //TsmResult SolveTravelingSalesmanProblem(Graph &graph);
 };
 }
