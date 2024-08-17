@@ -59,6 +59,12 @@ class S21Matrix {
   S21Matrix(size_t rows, size_t cols);
 
   /**
+   * @brief Constructor with initializer_list
+   * @param list
+   */
+  S21Matrix(std::initializer_list<std::initializer_list<T>> list);
+
+  /**
    * @brief Copy constructor
    * @param other
    */

@@ -19,8 +19,28 @@ S21Matrix<T>::S21Matrix() : rows_(0), cols_(0), matrix_(nullptr) {}
  * @param cols count of columns
  */
 template <typename T>
-S21Matrix<T>::S21Matrix(size_t rows, size_t cols) : rows_(rows), cols_(cols), matrix_(nullptr) {
+S21Matrix<T>::S21Matrix(size_t rows, size_t cols)
+    : rows_(rows), cols_(cols), matrix_(nullptr) {
   CreateMatrix();
+}
+
+/**
+ * @brief Constructor with initializer_list
+ * @param list
+ */
+template <typename T>
+S21Matrix<T>::S21Matrix(std::initializer_list<std::initializer_list<T>> list)
+    : rows_(list.size()), cols_(list.begin()->size()), matrix_(nullptr) {
+  CreateMatrix();
+
+  int i = 0;
+  int j = 0;
+
+  for (const auto &outer : list) {
+    for (const auto &inner : outer) matrix_[i][j++] = std::move(inner);
+    i++;
+    j = 0;
+  }
 }
 
 /**
@@ -228,7 +248,7 @@ S21Matrix<T> &S21Matrix<T>::operator=(S21Matrix &&other) {
  * @brief Print matrix
  */
 template <typename T>
-void S21Matrix<T>::Print() const{
+void S21Matrix<T>::Print() const {
   for (int i = 0; i < rows_; i++) {
     for (int j = 0; j < cols_; j++) {
       std::cout << matrix_[i][j] << " ";
