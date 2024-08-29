@@ -65,7 +65,7 @@ class GraphAlgorithms {
    * @param start_vertex - start vertex
    * @return The result of the traversal
    */
-  std::vector<int> DepthFirstSearch(Graph &graph, int start_vertex);
+  static std::vector<int> DepthFirstSearch(Graph &graph, int start_vertex);
 
   /**
    * @brief Breadth-first traversal algorithm for graph
@@ -73,7 +73,7 @@ class GraphAlgorithms {
    * @param start_vertex - start vertex
    * @return The result of the traversal
    */
-  std::vector<int> BreadthFirstSearch(Graph &graph, int start_vertex);
+  static std::vector<int> BreadthFirstSearch(Graph &graph, int start_vertex);
 
   /**
    * @brief Get shortest path between vertices by Dejkstra's algorithm
@@ -82,36 +82,36 @@ class GraphAlgorithms {
    * @param vertex2 - end vertex
    * @return The shortest path between vertices
    */
-  std::size_t GetShortestPathBetweenVertices(Graph &graph, int vertex1,
-                                             int vertex2);
+  static std::size_t GetShortestPathBetweenVertices(Graph &graph, int vertex1,
+                                                    int vertex2);
 
   /**
    * @brief Get shortest paths between all vertices by Floyd-Warshall algorithm
    * @param graph - the graph
    * @return The shortest paths between all vertices in adjacency matrix
    */
-  S21Matrix<int> GetShortestPathsBetweenAllVertices(Graph &graph);
+  static S21Matrix<int> GetShortestPathsBetweenAllVertices(Graph &graph);
 
   /**
    * @brief Get the least spanning tree by Prim's algorithm
    * @param graph - the graph
    * @return The least spanning tree in adjacency matrix
    */
-  S21Matrix<int> GetLeastSpanningTree(Graph &graph);
+  static S21Matrix<int> GetLeastSpanningTree(Graph &graph);
 
   /**
    * @brief Solve the traveling salesman problem by ant algorithm
    * @param graph - the graph
    * @return The result of the traveling salesman problem
    */
-  TsmResult SolveTravelingSalesmanProblem(Graph &graph);
+  static TsmResult SolveTravelingSalesmanProblem(Graph &graph);
 
   /**
    * @brief Solve the traveling salesman problem by simulated annealing
    * @param graph - the graph
    * @return The result of the traveling salesman problem
    */
-  TsmResult SolveTravelingSalesmanProblemThroughSimulatedAnnealing(
+  static TsmResult SolveTravelingSalesmanProblemThroughSimulatedAnnealing(
       Graph &graph);
 
   /**
@@ -119,7 +119,8 @@ class GraphAlgorithms {
    * @param graph - the graph
    * @return The result of the traveling salesman problem
    */
-  TsmResult SolveTravelingSalesmanProblemThroughGeneticAlgorithm(Graph &graph);
+  static TsmResult SolveTravelingSalesmanProblemThroughGeneticAlgorithm(
+      Graph &graph);
 
  private:
   /**
@@ -127,7 +128,7 @@ class GraphAlgorithms {
    * @param graph - the graph
    * @return The adjacency matrix
    */
-  S21Matrix<int> FloydWarshallAlgorithmMatrixInit(Graph &graph);
+  static S21Matrix<int> FloydWarshallAlgorithmMatrixInit(Graph &graph);
 
   /**
    * @brief Create adjacency matrix for Prim's algorithm from spantree
@@ -135,7 +136,7 @@ class GraphAlgorithms {
    * @param spantree - the spantree
    * @return The adjacency matrix
    */
-  S21Matrix<int> PrimAlgorithmAdjacencyMatrixCreate(
+  static S21Matrix<int> PrimAlgorithmAdjacencyMatrixCreate(
       Graph &graph, const std::vector<int> &spantree);
 
   /**
@@ -143,14 +144,14 @@ class GraphAlgorithms {
    * @param result - the result of the traveling salesman problem
    * @return The result of the traveling salesman problem
    */
-  TsmResult tsmResultNormalization(TsmResult result);
+  static TsmResult tsmResultNormalization(TsmResult result);
 
   /**
    * @brief Check if the graph is connected
    * @param graph - the graph
    * @return True if the graph is connected
    */
-  bool isGraphConnected(Graph &graph);
+  static bool isGraphConnected(Graph &graph);
 };
 }  // namespace s21
 

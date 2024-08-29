@@ -251,9 +251,8 @@ void UI::printBFSResult() {
 
   if (startVertex == -1) return;
 
-  GraphAlgorithms a;
-
-  std::vector<int> result = a.BreadthFirstSearch(*graph_, startVertex);
+  std::vector<int> result =
+      GraphAlgorithms::BreadthFirstSearch(*graph_, startVertex);
 
   printVectorOfVertices(result, "Breadth-first search result");
 }
@@ -315,9 +314,8 @@ void UI::printDFSResult() {
 
   if (startVertex == -1) return;
 
-  GraphAlgorithms a;
-
-  std::vector<int> result = a.BreadthFirstSearch(*graph_, startVertex);
+  std::vector<int> result =
+      GraphAlgorithms::DepthFirstSearch(*graph_, startVertex);
 
   printVectorOfVertices(result, "Depth-first search result");
 }
@@ -354,10 +352,8 @@ void UI::printDejkstraResult() {
 
   if (endVertex == -1) return;
 
-  GraphAlgorithms a;
-
-  std::size_t result =
-      a.GetShortestPathBetweenVertices(*graph_, startVertex, endVertex);
+  std::size_t result = GraphAlgorithms::GetShortestPathBetweenVertices(
+      *graph_, startVertex, endVertex);
 
   if (result == std::numeric_limits<std::size_t>::max())
     std::cout << "   ----------------------------------\n"
@@ -377,9 +373,8 @@ void UI::printDejkstraResult() {
  * @brief Print Floyd-Warshall algorithm result (Shortest Path Matrix)
  */
 void UI::printFloydWarshallResult() {
-  GraphAlgorithms a;
-
-  S21Matrix<int> result = a.GetShortestPathsBetweenAllVertices(*graph_);
+  S21Matrix<int> result =
+      GraphAlgorithms::GetShortestPathsBetweenAllVertices(*graph_);
 
   clearScreen();
 
@@ -393,9 +388,7 @@ void UI::printFloydWarshallResult() {
 void UI::printSpanningTreeResult() {
   clearScreen();
 
-  GraphAlgorithms a;
-
-  S21Matrix<int> result = a.GetLeastSpanningTree(*graph_);
+  S21Matrix<int> result = GraphAlgorithms::GetLeastSpanningTree(*graph_);
 
   if (result.GetCols() == 0)
     std::cout << "   ----------------------------------\n"
@@ -444,30 +437,26 @@ void UI::printTsmResult() {
 
   clearScreen();
 
-  GraphAlgorithms a;
-
-  // Используем std::bind для привязки метода к объекту
   std::function<TsmResult(Graph &)> func =
-      std::bind(&GraphAlgorithms::SolveTravelingSalesmanProblem, &a,
-                std::placeholders::_1);
+      GraphAlgorithms::SolveTravelingSalesmanProblem;
+
   executeTsmAlgorithm(N, "ANT ALGORITHM", func);
 
   std::cout << std::endl;
   for (std::size_t i = 0; i < 40; ++i) std::cout << "---";
   std::cout << "--" << std::endl;
 
-  func = std::bind(
-      &GraphAlgorithms::SolveTravelingSalesmanProblemThroughSimulatedAnnealing,
-      &a, std::placeholders::_1);
+  func =
+      GraphAlgorithms::SolveTravelingSalesmanProblemThroughSimulatedAnnealing;
+
   executeTsmAlgorithm(N, "SIMULATED ANNEALING ALGORITHM", func);
 
   std::cout << std::endl;
   for (std::size_t i = 0; i < 40; ++i) std::cout << "---";
   std::cout << "--" << std::endl;
 
-  func = std::bind(
-      &GraphAlgorithms::SolveTravelingSalesmanProblemThroughGeneticAlgorithm,
-      &a, std::placeholders::_1);
+  func = GraphAlgorithms::SolveTravelingSalesmanProblemThroughGeneticAlgorithm;
+
   executeTsmAlgorithm(N, "GENETIC ALGORITHM", func);
 
   std::cout << "\n";
@@ -481,8 +470,7 @@ void UI::printTsmResult() {
  */
 void UI::executeTsmAlgorithm(int N, const std::string &message,
                              std::function<TsmResult(Graph &)> func) {
-  std::chrono::duration<double, std::milli> durationAntAlgorithm =
-      std::chrono::duration<double, std::milli>::zero();
+  auto durationAntAlgorithm = std::chrono::duration<double, std::milli>::zero();
 
   for (int i = 0; i < N - 1; i++) {
     auto start = std::chrono::high_resolution_clock::now();
